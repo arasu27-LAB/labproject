@@ -1,0 +1,171 @@
+# Step 1: Import required packages
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Step 2: Load the CSV file into a DataFrame
+# Make sure "Iris.csv" is in the same directory as this script
+df = pd.read_csv(r"C:\Users\PSVCS01\Desktop\FDS\Iris Ex (FDS 4).csv")
+
+# --- DATA EXPLORATION AND DESCRIPTION ---
+
+# Printing top 5 rows
+print("--- Top 5 Rows of the Dataset ---")
+print(df.head())
+print("\n" + "="*50 + "\n")
+
+# Getting Information about the Dataset
+print("--- Dataset Shape ---")
+print(df.shape)
+print("\n--- Dataset Info ---")
+df.info()
+print("\n" + "="*50 + "\n")
+
+# Getting descriptive statistics
+print("--- Descriptive Statistics ---")
+print(df.describe())
+print("\n" + "="*50 + "\n")
+
+# --- DATA CLEANING AND PREPARATION ---
+
+# Checking for Missing Values
+print("--- Missing Values Check ---")
+print(df.isnull().sum())
+print("\n" + "="*50 + "\n")
+
+# Checking for Duplicates
+print("--- Dropping Duplicates (based on Species for demonstration) ---")
+data = df.drop_duplicates(subset="Species")
+print(data)
+print("\n" + "="*50 + "\n")
+
+# Counting values for the 'Species' column
+print("--- Value Counts for Species ---")
+print(df.value_counts("Species"))
+print("\n" + "="*50 + "\n")
+
+
+# --- DATA VISUALIZATION ---
+
+# Count Plot for Species
+print("--- Displaying Count Plot for Species ---")
+sns.countplot(x='Species', data=df)
+plt.title("Count of Each Species")
+plt.show()
+
+# Comparing Sepal Length and Sepal Width
+print("--- Displaying Scatter Plot for Sepal Length vs. Sepal Width ---")
+sns.scatterplot(x='SepalLengthCm', y='SepalWidthCm', hue='Species', data=df)
+plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
+plt.title("Sepal Length vs. Sepal Width")
+plt.tight_layout()
+plt.show()
+
+# Pair Plot for all features
+print("--- Displaying Pair Plot ---")
+sns.pairplot(df.drop(['Id'], axis=1), hue='Species', height=2)
+plt.suptitle("Pair Plot of Iris Dataset Features", y=1.02)
+plt.show()
+
+# Histograms for each feature
+print("--- Displaying Histograms for each feature ---")
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+axes[0,0].set_title("Sepal Length")
+axes[0,0].hist(df['SepalLengthCm'], bins=7)
+axes[0,1].set_title("Sepal Width")
+axes[0,1].hist(df['SepalWidthCm'], bins=5)
+axes[1,0].set_title("Petal Length")
+axes[1,0].hist(df['PetalLengthCm'], bins=6)
+axes[1,1].set_title("Petal Width")
+axes[1,1].hist(df['PetalWidthCm'], bins=6)
+plt.tight_layout()
+plt.show()
+
+# Histograms with Distplot Plot
+print("--- Displaying Distribution Plots ---")
+plot = sns.FacetGrid(df, hue="Species")
+plot.map(sns.distplot, "SepalLengthCm").add_legend()
+plt.suptitle("Distribution of Sepal Length by Species", y=1.02)
+
+plot = sns.FacetGrid(df, hue="Species")
+plot.map(sns.distplot, "SepalWidthCm").add_legend()
+plt.suptitle("Distribution of Sepal Width by Species", y=1.02)
+
+
+plot = sns.FacetGrid(df, hue="Species")
+plot.map(sns.distplot, "PetalLengthCm").add_legend()
+plt.suptitle("Distribution of Petal Length by Species", y=1.02)
+
+
+plot = sns.FacetGrid(df, hue="Species")
+plot.map(sns.distplot, "PetalWidthCm").add_legend()
+plt.suptitle("Distribution of Petal Width by Species", y=1.02)
+
+plt.show()
+
+
+# --- CORRELATION ANALYSIS ---
+
+# Correlation Matrix
+print("--- Correlation Matrix ---")
+# Using the 'data' dataframe which has unique species rows as shown in the manual
+print(data.corr(method='pearson'))
+print("\n" + "="*50 + "\n")
+
+# Heatmap of Correlations
+print("--- Displaying Correlation Heatmap ---")
+plt.figure(figsize=(8, 6))
+sns.heatmap(df.corr(method='pearson').drop(['Id'], axis=1).drop(['Id'], axis=0), annot=True)
+plt.title("Correlation Heatmap of Iris Features")
+plt.show()
+
+
+# --- BOX PLOTS AND OUTLIER ANALYSIS ---
+
+# Box Plots for each feature by Species
+print("--- Displaying Box Plots for each feature by Species ---")
+plt.figure(figsize=(12, 10))
+plt.subplot(221)
+graph1 = sns.boxplot(x="Species", y="SepalLengthCm", data=df)
+plt.subplot(222)
+graph2 = sns.boxplot(x="Species", y="SepalWidthCm", data=df)
+plt.subplot(223)
+graph3 = sns.boxplot(x="Species", y="PetalLengthCm", data=df)
+plt.subplot(224)
+graph4 = sns.boxplot(x="Species", y="PetalWidthCm", data=df)
+plt.suptitle("Features vs. Species")
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.show()
+
+# Box plot to identify outliers in SepalWidthCm
+print("--- Displaying Box Plot for SepalWidthCm to check for outliers ---")
+plt.figure(figsize=(8, 6))
+sns.boxplot(x='SepalWidthCm', data=df)
+plt.title("Box Plot of Sepal Width (Before Outlier Removal)")
+plt.show()
+
+# Removing Outliers from SepalWidthCm
+print("--- Removing Outliers from SepalWidthCm ---")
+print("Old Shape: ", df.shape)
+Q1 = np.percentile(df['SepalWidthCm'], 25, interpolation='midpoint')
+Q3 = np.percentile(df['SepalWidthCm'], 75, interpolation='midpoint')
+IQR = Q3 - Q1
+
+# Upper and lower bounds
+upper_bound = Q3 + 1.5 * IQR
+lower_bound = Q1 - 1.5 * IQR
+
+upper = np.where(df['SepalWidthCm'] >= upper_bound)
+lower = np.where(df['SepalWidthCm'] <= lower_bound)
+
+# Removing the outliers
+df.drop(upper[0], inplace=True)
+df.drop(lower[0], inplace=True)
+
+print("New Shape: ", df.shape)
+
+# Displaying Box plot after removing outliers
+sns.boxplot(x='SepalWidthCm', data=df)
+plt.title("Box Plot of Sepal Width (After Outlier Removal)")
+plt.show()

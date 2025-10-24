@@ -1,0 +1,11 @@
+encounter_id,patient_nbr,race,gender,age,weight,admission_type_id,discharge_disposition_id,admission_source_id,time_in_hospital,payer_code,medical_specialty,num_lab_procedures,num_procedures,num_medications,number_outpatient,number_emergency,number_inpatient,diag_1,diag_2,diag_3,number_diagnoses,max_glu_serum,A1Cresult,metformin,repaglinide,nateglinide,chlorpropamide,glimepiride,acetohexamide,glipizide,glyburide,tolbutamide,pioglitazone,rosiglitazone,acarbose,miglitol,troglitazone,tolazamide,examide,citoglipton,insulin,glyburide-metformin,glipizide-metformin,glimepiride-pioglitazone,metformin-rosiglitazone,metformin-pioglitazone,change,diabetesMed,readmitted.
+1,101,Caucasian,Male,[50-60),?,1,1,7,5,?,?,45,0,10,2,0,1,250.83,401,414,9,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO
+2,102,AfricanAmerican,Female,[60-70),?,1,1,7,6,?,?,30,0,12,1,0,0,250.01,250,428,7,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO
+3,103,Asian,Female,[70-80),?,2,1,7,4,?,?,25,1,15,0,1,0,250.80,410,786,8,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO
+4,104,Hispanic,Male,[40-50),?,3,1,7,3,?,?,35,0,8,0,0,0,250.60,272,250,6,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO
+5,105,Other,Male,[30-40),?,1,2,7,7,?,?,50,2,16,0,0,1,250.00,250,401,5,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO
+6,106,Caucasian,Female,[60-70),?,1,1,7,8,?,?,40,1,20,1,0,2,250.20,401,414,8,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO
+7,107,AfricanAmerican,Male,[70-80),?,2,2,7,2,?,?,15,0,6,0,1,0,250.40,250,428,6,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO
+8,108,Asian,Female,[40-50),?,3,1,7,5,?,?,28,0,9,0,0,1,250.10,410,786,7,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO
+9,109,Hispanic,Male,[50-60),?,1,1,7,4,?,?,33,1,11,2,0,0,250.90,272,250,9,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO
+10,110,Other,Female,[30-40),?,2,1,7,6,?,?,48,1,14,1,0,1,250.30,250,401,6,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO

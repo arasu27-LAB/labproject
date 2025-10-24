@@ -1,0 +1,58 @@
+# Step 1 & 2: Import required package
+import pandas as pd
+
+# Step 3: Create a simple DataFrame using built-in method
+data = {
+    "calories": [420, 380, 390],
+    "duration": [50, 40, 45]
+}
+df = pd.DataFrame(data)
+print("Simple DataFrame:")
+print(df)
+
+# Step 4: Locate row by index
+print("\nLocate row at index 0:")
+print(df.loc[0])  # Returns a Series
+
+# Step 5: Use a list of indexes
+print("\nLocate multiple rows [0, 1]:")
+print(df.loc[[0, 1]])  # Returns a DataFrame
+
+# Step 6: Create DataFrame with named indexes
+data = {
+    "calories": [420, 380, 390],
+    "duration": [50, 40, 45]
+}
+df = pd.DataFrame(data, index=["day1", "day2", "day3"])
+print("\nDataFrame with named indexes:")
+print(df)
+
+# Step 7: Locate using named index
+print("\nLocate row 'day2':")
+print(df.loc["day2"])
+
+# Step 8: Load data from CSV file (assuming 'data.csv' is present)
+print("\nLoad data from CSV:")
+df = pd.read_csv("data.csv")
+print(df)
+
+# Step 9: Check max number of rows returned (default)
+print("\nDefault max rows setting:")
+print(pd.options.display.max_rows)
+
+# Change max rows to show all data
+pd.options.display.max_rows = 9999
+df = pd.read_csv("data.csv")
+print("\nFull DataFrame after changing max_rows:")
+print(df)
+
+# Step 10: Viewing first 5 rows
+print("\nFirst 5 rows:")
+print(df.head())
+
+# Step 11: Viewing last 5 rows and info
+print("\nLast 5 rows:")
+print(df.tail())
+
+print("\nDataFrame Info:")
+print(df.info())

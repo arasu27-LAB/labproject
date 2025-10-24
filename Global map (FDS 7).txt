@@ -1,0 +1,82 @@
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.basemap import Basemap
+
+# -------------------------------------------------------------------
+# 1. Global map with Ortho Projection
+plt.figure(figsize=(8, 8))
+m = Basemap(projection='ortho', resolution=None, lat_0=50, lon_0=-100)
+m.bluemarble(scale=0.5)
+plt.title("Orthographic Projection", fontsize=15)
+plt.show()
+
+# -------------------------------------------------------------------
+# 2. Lambert Conformal Projection with India marked
+plt.figure(figsize=(8, 8))
+m = Basemap(projection='lcc', resolution=None,
+            width=8E6, height=8E6,
+            lat_0=45, lon_0=-100)
+m.etopo(scale=0.5, alpha=0.5)
+
+# Example coordinates for India
+x, y = m(-122.3, 47.6)
+plt.plot(x, y, 'ok', markersize=5)
+plt.text(x, y, 'INDIA', fontsize=12)
+plt.title("Lambert Conformal Projection with Point", fontsize=15)
+plt.show()
+
+# -------------------------------------------------------------------
+# 3. Coastlines
+plt.figure(figsize=(12, 12))
+m = Basemap()
+m.drawcoastlines()
+plt.title("Coastlines", fontsize=20)
+plt.show()
+
+# -------------------------------------------------------------------
+# 4. Styled Coastlines (red dashed)
+plt.figure(figsize=(12, 12))
+m = Basemap()
+m.drawcoastlines(linewidth=1.0, linestyle='dashed', color='red')
+plt.title("Coastlines - Styled", fontsize=20)
+plt.show()
+
+# -------------------------------------------------------------------
+# 5. Country Boundaries
+plt.figure(figsize=(12, 12))
+m = Basemap()
+m.drawcoastlines(linewidth=1.0, linestyle='solid', color='black')
+m.drawcountries()
+x, y = m(-122.3, 47.6)
+plt.plot(x, y, 'ok', markersize=5)
+plt.text(x, y, 'INDIA', fontsize=12)
+plt.title("Country Boundaries", fontsize=20)
+plt.show()
+
+# -------------------------------------------------------------------
+# 6. Mercator Projection
+plt.figure(figsize=(10, 8))
+m = Basemap(projection='merc',
+            llcrnrlat=-80, urcrnrlat=80,
+            llcrnrlon=-180, urcrnrlon=180,
+            resolution='l')
+m.drawcoastlines()
+m.fillcontinents(color='tan', lake_color='lightblue')
+m.drawmapboundary(fill_color='lightblue')
+m.drawcountries(linewidth=1, linestyle='solid', color='k')
+plt.title("Mercator Projection", fontsize=20)
+plt.show()
+
+# -------------------------------------------------------------------
+# 7. Cylindrical Equidistant Projection
+plt.figure(figsize=(10, 8))
+m = Basemap(projection='cyl',
+            llcrnrlat=-80, urcrnrlat=80,
+            llcrnrlon=-180, urcrnrlon=180)
+m.drawcoastlines()
+m.fillcontinents(color='tan', lake_color='lightblue')
+m.drawmapboundary(fill_color='lightblue')
+m.drawcountries(linewidth=1, linestyle='solid', color='k')
+plt.title("Cylindrical Equidistant Projection", fontsize=20)
+plt.show()
